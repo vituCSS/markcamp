@@ -1,38 +1,119 @@
-.App {
-  text-align: center;
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --accent-color: #e74c3c;
+  --light-color: #ecf0f1;
+  --dark-color: #2c3e50;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.navbar {
+  background-color: var(--primary-color);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.sidebar {
+  background-color: var(--dark-color);
   color: white;
+  height: calc(100vh - 56px);
+  position: fixed;
+  padding-top: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.sidebar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 15px;
+  display: block;
+  transition: all 0.3s;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.sidebar a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.btn-primary {
+  background-color: var(--secondary-color);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #2980b9;
+}
+
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.status-planned {
+  background-color: #ffeaa7;
+  color: #d35400;
+}
+
+.status-progress {
+  background-color: #81ecec;
+  color: #00b894;
+}
+
+.status-completed {
+  background-color: #55efc4;
+  color: #00b894;
+}
+
+.status-delayed {
+  background-color: #fab1a0;
+  color: #d63031;
+}
+
+.dashboard-card {
+  text-align: center;
+  padding: 20px;
+}
+
+.dashboard-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--secondary-color);
+}
+
+.page-title {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--secondary-color);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .main-content {
+    margin-left: 0;
   }
 }
