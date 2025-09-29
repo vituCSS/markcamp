@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const { nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento } = req.body;
   db.query(
-    'INSERT INTO obras (nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    'INSERT INTO obras (nome, localizacao, gestor, ostatus, progresso, descricao, dataInicio, dataFim, orcamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
     [nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento],
     (err, results) => {
       if (err) {
@@ -46,7 +46,7 @@ router.put('/:id', (req, res) => {
   const { id } = req.params;
   const { nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento } = req.body;
   db.query(
-    'UPDATE obras SET nome = ?, localizacao = ?, gestor = ?, status = ?, progresso = ?, descricao = ?, dataInicio = ?, dataFim = ?, orcamento = ? WHERE id = ?',
+    'UPDATE obras SET nome = ?, localizacao = ?, gestor = ?, ostatus = ?, progresso = ?, descricao = ?, dataInicio = ?, dataFim = ?, orcamento = ? WHERE id = ?',
     [nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento, id],
     (err, results) => {
       if (err) {
