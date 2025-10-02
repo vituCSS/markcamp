@@ -49,12 +49,6 @@ const ObraList = ({ obras, onEdit, onDelete }) => {
                       <i className="bi bi-eye"></i>
                     </button>
                     <button 
-                      className="btn btn-sm btn-warning me-2"
-                      onClick={() => onEdit(obra)}
-                    >
-                      <i className="bi bi-pencil"></i>
-                    </button>
-                    <button 
                       className="btn btn-sm btn-danger"
                       onClick={() => onDelete(obra.id)}
                     >

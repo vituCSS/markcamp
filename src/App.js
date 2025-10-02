@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-import './styles/App.css';
+import './App.css'
 
-import Navbar from './components/Layout/Navbar';
-import Sidebar from './components/Layout/Sidebar';
+import Navbar from './components/layout/NavBar';
+import Sidebar from './components/layout/SideBar';
 import Dashboard from './pages/Dashboard';
 import Obras from './pages/Obras';
 import Gestores from './pages/Gestores';
@@ -91,12 +91,12 @@ function App() {
                     deleteObra={deleteObra} 
                   />
                 } />
-                <Route path="/gestores" element={
+                {/*<Route path="/gestores" element={
                   <Gestores 
                     gestores={gestores} 
                     setGestores={setGestores} 
                   />
-                } />
+                } />*/}
               </Routes>
             </div>
           </div>

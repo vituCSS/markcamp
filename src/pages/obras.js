@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import ObraList from '../components/Obras/ObraList';
-import ObraForm from '../components/Obras/ObraForm';
+import ObraList from '../components/obras/ObraList';
+import ObraForm from '../components/obras/ObraForm';
 
 const Obras = ({ obras, addObra, updateObra, deleteObra }) => {
   const [editingObra, setEditingObra] = useState(null);
