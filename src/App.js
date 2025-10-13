@@ -4,11 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 import './App.css'
 
-import Navbar from './components/layout/NavBar';
-import Sidebar from './components/layout/SideBar';
-import Dashboard from './pages/Dashboard';
-import Obras from './pages/Obras';
-import Gestores from './pages/Gestores';
+import Navbar from './components/layout/navbar.js';
+import Sidebar from './components/layout/sidebar.js';
+import Dashboard from './pages/dashboard.js';
+import Obras from './pages/obras.js';
+import Gestores from './pages/gestores.js';
 
 function App() {
   const [obras, setObras] = useState([]);
@@ -16,7 +16,18 @@ function App() {
 
   useEffect(() => {
     fetchObras();
+    fetchGestores();
   }, []);
+
+  const fetchGestores = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/api/gestores');
+      const data = await response.json();
+      setGestores(data);
+    } catch (error) {
+      console.error('Erro ao buscar gestores:', error);
+    }
+  };
 
   const fetchObras = async () => {
     try {
@@ -72,38 +83,39 @@ function App() {
   };
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar />
-        <div className="container-fluid">
-          <div className="row">
-            <Sidebar />
-            <div className="col-md-10 main-content">
-              <Routes>
-                <Route path="/" element={
-                  <Dashboard obras={obras} gestores={gestores} />
-                } />
-                <Route path="/obras" element={
-                  <Obras 
-                    obras={obras} 
-                    addObra={addObra} 
-                    updateObra={updateObra}
-                    deleteObra={deleteObra} 
-                  />
-                } />
-                {/*<Route path="/gestores" element={
-                  <Gestores 
-                    gestores={gestores} 
-                    setGestores={setGestores} 
-                  />
-                } />*/}
-              </Routes>
-            </div>
+  <Router>
+    <div className="App">
+      <Navbar />
+      <div className="container-fluid">
+        <div className="row">
+          <Sidebar />
+          <div className="col-md-10 main-content">
+            <Routes>
+              <Route path="/" element={
+                <Dashboard obras={obras} gestores={gestores} />
+              } />
+              <Route path="/obras" element={
+                <Obras 
+                  obras={obras} 
+                  gestores={gestores}
+                  addObra={addObra} 
+                  updateObra={updateObra}
+                  deleteObra={deleteObra} 
+                />
+              } />
+              <Route path="/gestores" element={
+                <Gestores 
+                  gestores={gestores} 
+                  setGestores={setGestores} 
+                />
+              } />
+            </Routes>
           </div>
         </div>
       </div>
-    </Router>
-  );
+    </div>
+  </Router>
+);
 }
 
 export default App;

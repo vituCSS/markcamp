@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import ObraList from '../components/obras/ObraList';
-import ObraForm from '../components/obras/ObraForm';
+import ObraList from '../components/obras/obralist.js';
+import ObraForm from '../components/obras/obraform.js';
 
-const Obras = ({ obras, addObra, updateObra, deleteObra }) => {
+const Obras = ({ obras, gestores, addObra, updateObra, deleteObra }) => {
+  console.log('Gestores no Obras (pages/obras.js):', gestores);
+  
   const [editingObra, setEditingObra] = useState(null);
   const [showForm, setShowForm] = useState(false);
 
@@ -33,6 +35,7 @@ const Obras = ({ obras, addObra, updateObra, deleteObra }) => {
       {showForm ? (
         <ObraForm 
           obra={editingObra} 
+          gestores={gestores}
           onSubmit={handleSubmit} 
           onCancel={handleCancel} 
         />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ObraForm = ({ obra, onSubmit, onCancel }) => {
+const ObraForm = ({ obra, gestores, onSubmit, onCancel }) => {
   const [nome, setNome] = useState('');
   const [localizacao, setLocalizacao] = useState('');
   const [gestor, setGestor] = useState('');
@@ -74,14 +74,20 @@ const ObraForm = ({ obra, onSubmit, onCancel }) => {
           <div className="row">
             <div className="col-md-6 mb-3">
               <label htmlFor="gestor" className="form-label">Gestor Responsável</label>
-              <input 
-                type="text" 
-                className="form-control" 
-                id="gestor" 
+              <select 
+                className="form-select" 
+                id="gestor"
                 value={gestor} 
                 onChange={(e) => setGestor(e.target.value)} 
-                required 
-              />
+                required
+              >
+                <option value="">Selecione um gestor</option>
+                {gestores.map(gestor => (
+                  <option key={gestor.id} value={gestor.nome}>
+                    {gestor.nome} - {gestor.cadastro_empresa}
+                  </option>
+                ))}
+              </select>
             </div>
             <div className="col-md-6 mb-3">
               <label htmlFor="status" className="form-label">Status</label>
