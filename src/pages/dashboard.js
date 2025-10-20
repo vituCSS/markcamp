@@ -1,4 +1,6 @@
 import React from 'react';
+import logo from '../assets/logomarkcamp.png';
+
 
 const Dashboard = ({ obras, gestores }) => {
   const obrasEmAndamento = obras.filter(obra => obra.status === 'Em andamento').length;
@@ -7,7 +9,16 @@ const Dashboard = ({ obras, gestores }) => {
 
   return (
     <>
-      <h2 className="page-title">Dashboard</h2>
+      <div className="d-flex align-items-center mb-4">
+        <img 
+          src={logo} 
+          alt="Logo do Sistema" 
+          className="me-3"
+          style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+        />
+        <h2 className="page-title mb-0">Dashboard</h2>
+      </div>
+      
       
       <div className="row">
         <div className="col-md-3">
