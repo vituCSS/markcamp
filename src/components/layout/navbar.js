@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Navbar = () => {
+const Navbar = ({ user, onLogout }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark">
       <div className="container-fluid">
@@ -12,11 +12,19 @@ const Navbar = () => {
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav ms-auto">
-            <li className="nav-item">
-              <a className="nav-link" href="#"><i className="bi bi-person-circle"></i></a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#"><i className="bi bi-box-arrow-right"></i> Sair</a>
+            <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                <i className="bi bi-person-circle"></i> {user?.nome}
+              </a>
+              <ul className="dropdown-menu">
+                <li><span className="dropdown-item-text">{user?.email}</span></li>
+                <li><hr className="dropdown-divider" /></li>
+                <li>
+                  <button className="dropdown-item" onClick={onLogout}>
+                    <i className="bi bi-box-arrow-right"></i> Sair
+                  </button>
+                </li>
+              </ul>
             </li>
           </ul>
         </div>

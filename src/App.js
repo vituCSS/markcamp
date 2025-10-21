@@ -6,6 +6,7 @@ import './App.css'
 
 import Navbar from './components/layout/navbar.js';
 import Sidebar from './components/layout/sidebar.js';
+import Login from './pages/login.js';
 import Dashboard from './pages/dashboard.js';
 import Obras from './pages/obras.js';
 import Gestores from './pages/gestores.js';
@@ -13,15 +14,33 @@ import Gestores from './pages/gestores.js';
 function App() {
   const [obras, setObras] = useState([]);
   const [gestores, setGestores] = useState([]);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetchObras();
-    fetchGestores();
-  }, []);
+    // Verificar se usuário já está logado
+    const token = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('user');
+    
+    if (token && savedUser) {
+      setIsAuthenticated(true);
+      setUser(JSON.parse(savedUser));
+    }
+    
+    if (isAuthenticated) {
+      fetchObras();
+      fetchGestores();
+    }
+  }, [isAuthenticated]);
 
   const fetchGestores = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/gestores');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/gestores', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await response.json();
       setGestores(data);
     } catch (error) {
@@ -31,7 +50,12 @@ function App() {
 
   const fetchObras = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/obras');
+      const token = localStorage.getItem('token');
+      const response = await fetch('http://localhost:5000/api/obras', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await response.json();
       setObras(data);
     } catch (error) {
@@ -41,10 +65,12 @@ function App() {
 
   const addObra = async (obra) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:5000/api/obras', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(obra),
       });
@@ -57,10 +83,12 @@ function App() {
 
   const updateObra = async (id, updatedObra) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:5000/api/obras/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(updatedObra),
       });
@@ -73,8 +101,12 @@ function App() {
 
   const deleteObra = async (id) => {
     try {
+      const token = localStorage.getItem('token');
       await fetch(`http://localhost:5000/api/obras/${id}`, {
         method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
       setObras(obras.filter(obra => obra.id !== id));
     } catch (error) {
@@ -82,40 +114,56 @@ function App() {
     }
   };
 
+  const handleLogin = (userData) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setIsAuthenticated(false);
+    setUser(null);
+  };
+
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />;
+  }
+
   return (
-  <Router>
-    <div className="App">
-      <Navbar />
-      <div className="container-fluid">
-        <div className="row">
-          <Sidebar />
-          <div className="col-md-10 main-content">
-            <Routes>
-              <Route path="/" element={
-                <Dashboard obras={obras} gestores={gestores} />
-              } />
-              <Route path="/obras" element={
-                <Obras 
-                  obras={obras} 
-                  gestores={gestores}
-                  addObra={addObra} 
-                  updateObra={updateObra}
-                  deleteObra={deleteObra} 
-                />
-              } />
-              <Route path="/gestores" element={
-                <Gestores 
-                  gestores={gestores} 
-                  setGestores={setGestores} 
-                />
-              } />
-            </Routes>
+    <Router>
+      <div className="App">
+        <Navbar user={user} onLogout={handleLogout} />
+        <div className="container-fluid">
+          <div className="row">
+            <Sidebar />
+            <div className="col-md-10 main-content">
+              <Routes>
+                <Route path="/" element={
+                  <Dashboard obras={obras} gestores={gestores} />
+                } />
+                <Route path="/obras" element={
+                  <Obras 
+                    obras={obras} 
+                    gestores={gestores}
+                    addObra={addObra} 
+                    updateObra={updateObra}
+                    deleteObra={deleteObra} 
+                  />
+                } />
+                <Route path="/gestores" element={
+                  <Gestores 
+                    gestores={gestores} 
+                    setGestores={setGestores} 
+                  />
+                } />
+              </Routes>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </Router>
-);
+    </Router>
+  );
 }
 
 export default App;

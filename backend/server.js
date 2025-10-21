@@ -91,12 +91,15 @@ app.use(cors({
 
 app.use(express.json());
 
-// ROTAS
+// IMPORTAR ROTAS
 const obrasRoutes = require('./routes/obras.js');
-app.use('/api/obras', obrasRoutes);
-
 const gestoresRoutes = require('./routes/gestores.js');
+const auth = require('./routes/auth.js');
+
+// USAR ROTAS
+app.use('/api/obras', obrasRoutes);
 app.use('/api/gestores', gestoresRoutes);
+app.use('/api/auth', auth.router);
 
 app.listen(PORT, () => {
   console.log(`🚀 Servidor rodando na porta ${PORT}`);
