@@ -1,1 +1,1 @@
-{/ta funfando/}
+Em homenagem a todos os estudantes de ADS de 2023 a 2026, a todos que trabalham com engenharia e quem nao gosta de java S2.
