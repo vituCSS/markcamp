@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // backend/routes/obras.js
 const express = require('express');
 const router = express.Router();
@@ -44,10 +45,23 @@ router.get('/', authenticateToken, (req, res) => {
   query += ' ORDER BY created_at DESC';
   db.query(query, params, (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
+=======
+const express = require('express');
+const router = express.Router();
+const db = require('../config/database');
+
+// GET todas as obras
+router.get('/', (req, res) => {
+  db.query('SELECT * FROM obras', (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
     res.json(results);
   });
 });
 
+<<<<<<< HEAD
 // Criar obra
 router.post('/', authenticateToken, authorize('gestor'), (req, res) => {
   const { nome, localizacao, gestor, mestre_obra, descricao, dataInicio, dataFim, orcamento } = req.body;
@@ -120,10 +134,23 @@ router.get('/:id', authenticateToken, (req, res) => {
   db.query('SELECT * FROM obras WHERE id = ?', [req.params.id], (err, results) => {
     if (err) return res.status(500).json({ error: err.message });
     if (results.length === 0) return res.status(404).json({ message: 'Obra não encontrada.' });
+=======
+// GET uma obra por ID
+router.get('/:id', (req, res) => {
+  const { id } = req.params;
+  db.query('SELECT * FROM obras WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    if (results.length === 0) {
+      return res.status(404).json({ message: 'Obra não encontrada' });
+    }
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
     res.json(results[0]);
   });
 });
 
+<<<<<<< HEAD
 // Atualizar obra
 router.put('/:id', authenticateToken, authorize('gestor'), (req, res) => {
   const { id } = req.params;
@@ -141,10 +168,25 @@ router.put('/:id', authenticateToken, authorize('gestor'), (req, res) => {
         if (err) return res.status(500).json({ error: err.message });
         res.json(rows[0]);
       });
+=======
+// POST criar uma obra
+router.post('/', (req, res) => {
+  const { nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento } = req.body;
+  
+  db.query(
+    'INSERT INTO obras (nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+    [nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento],
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      res.status(201).json({ id: results.insertId, ...req.body });
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
     }
   );
 });
 
+<<<<<<< HEAD
 // Excluir obra
 router.delete('/:id', authenticateToken, authorize('gestor'), (req, res) => {
   db.query('DELETE FROM obras WHERE id = ?', [req.params.id], (err) => {
@@ -451,3 +493,41 @@ function gerarPDFRelatorio(res, obra, diario, materiais, atividades, ocorrencias
 }
 
 module.exports = router;
+=======
+// PUT atualizar uma obra
+router.put('/:id', (req, res) => {
+  const { id } = req.params;
+  const { nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento } = req.body;
+  
+  db.query(
+    'UPDATE obras SET nome = ?, localizacao = ?, gestor = ?, status = ?, progresso = ?, descricao = ?, dataInicio = ?, dataFim = ?, orcamento = ? WHERE id = ?',
+    [nome, localizacao, gestor, status, progresso, descricao, dataInicio, dataFim, orcamento, id],
+    (err, results) => {
+      if (err) {
+        return res.status(500).json({ error: err.message });
+      }
+      if (results.affectedRows === 0) {
+        return res.status(404).json({ message: 'Obra não encontrada' });
+      }
+      res.json({ id, ...req.body });
+    }
+  );
+});
+
+// DELETE uma obra
+router.delete('/:id', (req, res) => {
+  const { id } = req.params;
+  
+  db.query('DELETE FROM obras WHERE id = ?', [id], (err, results) => {
+    if (err) {
+      return res.status(500).json({ error: err.message });
+    }
+    if (results.affectedRows === 0) {
+      return res.status(404).json({ message: 'Obra não encontrada' });
+    }
+    res.json({ message: 'Obra excluída com sucesso' });
+  });
+});
+
+module.exports = router;
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89

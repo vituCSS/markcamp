@@ -1,6 +1,7 @@
 {
   "name": "markcamp-app",
   "version": "1.0.0",
+<<<<<<< HEAD
   "private": true,
   "dependencies": {
     "bootstrap": "^5.3.0",
@@ -11,12 +12,28 @@
     "react-router-dom": "^6.20.0",
     "react-scripts": "5.0.1"
   },
+=======
+  "description": "Sistema de gestão de obras públicas",
+  "main": "src/index.js",
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+<<<<<<< HEAD
+=======
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "bootstrap-icons": "^1.13.1",
+    "cor": "^0.0.0",
+    "cors": "^2.8.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0"
+  },
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
   "browserslist": {
     "production": [
       ">0.2%",
@@ -28,5 +45,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+<<<<<<< HEAD
   }
 }
+=======
+  },
+  "devDependencies": {
+    "react-scripts": "^5.0.1"
+  }
+}
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89

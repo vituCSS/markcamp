@@ -1,13 +1,17 @@
 const express = require('express');
 const cors = require('cors');
+<<<<<<< HEAD
 const path = require('path');
 const fs = require('fs');
+=======
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
 const mysql = require('mysql2');
 require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+<<<<<<< HEAD
 // ─── Conexão única com MySQL ──────────────────────────────────
 const db = mysql.createConnection({
   host: process.env.DB_HOST || 'localhost',
@@ -44,10 +48,87 @@ db.connect((err) => {
 
       // Iniciar o servidor HTTP
       startServer();
+=======
+// Conexão com MySQL - COM CRIAÇÃO AUTOMÁTICA DO BANCO
+const connection = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT
+});
+
+// CONECTA/CRIA BANCO
+connection.connect((err) => {
+  if (err) {
+    console.error('Erro ao conectar ao MySQL:', err);
+    return;
+  }
+
+  connection.query('CREATE DATABASE IF NOT EXISTS markcamp_db', (err) => {
+    if (err) {
+      console.error('Erro ao criar banco:', err);
+      return;
+    }
+    console.log('Banco criado/verificado');
+    
+    connection.query('USE markcamp_db', (err) => {
+      if (err) {
+        console.error('Erro ao usar banco:', err);
+        return;
+      }
+      console.log('Usando banco markcamp_db');
+      
+      // CRIA TABELAS
+      const tabelaObras = `
+        CREATE TABLE IF NOT EXISTS obras (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          nome VARCHAR(255) NOT NULL,
+          localizacao VARCHAR(255) NOT NULL,
+          gestor VARCHAR(255) NOT NULL,
+          status VARCHAR(50) NOT NULL,
+          progresso INT NOT NULL,
+          descricao TEXT,
+          dataInicio DATE,
+          dataFim DATE,
+          orcamento DECIMAL(15,2),
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+      `;
+      
+      const tabelaGestores = `
+        CREATE TABLE IF NOT EXISTS gestores (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          nome VARCHAR(255) NOT NULL,
+          cadastro_empresa VARCHAR(100) NOT NULL,
+          email VARCHAR(255) UNIQUE NOT NULL,
+          telefone VARCHAR(20),
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+      `;
+      
+      // Cria tabela obras
+      connection.query(tabelaObras, (err) => {
+        if (err) {
+          console.error('Erro ao criar tabela obras:', err);
+          return;
+        }
+        console.log('Tabela obras criada/verificada');
+        
+        // Cria tabela gestores
+        connection.query(tabelaGestores, (err) => {
+          if (err) {
+            console.error('Erro ao criar tabela gestores:', err);
+            return;
+          }
+          console.log('Tabela gestores criada/verificada');
+        });
+      });
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
     });
   });
 });
 
+<<<<<<< HEAD
 // ─── Criação de tabelas ───────────────────────────────────────
 function createAllTables() {
   const tables = [
@@ -201,3 +282,27 @@ function startServer() {
 
 // Exporta a conexão única para todas as rotas
 module.exports = db;
+=======
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
+
+app.use(express.json());
+
+// IMPORTAR ROTAS
+const obrasRoutes = require('./routes/obras.js');
+const gestoresRoutes = require('./routes/gestores.js');
+const auth = require('./routes/auth.js');
+
+// USAR ROTAS
+app.use('/api/obras', obrasRoutes);
+app.use('/api/gestores', gestoresRoutes);
+app.use('/api/auth', auth.router);
+
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando na porta ${PORT}`);
+});
+
+module.exports = connection;
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89

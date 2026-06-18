@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
+<<<<<<< HEAD
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+=======
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
 import './App.css'
 
 import Navbar from './components/layout/navbar.js';
@@ -10,20 +16,27 @@ import Login from './pages/login.js';
 import Dashboard from './pages/dashboard.js';
 import Obras from './pages/obras.js';
 import Gestores from './pages/gestores.js';
+<<<<<<< HEAD
 import Mestres from './pages/mestres.js';
 import ObraDetalhes from './pages/obradetalhes.js';
 import Relatorio from './pages/relatorio.js';
 import DiarioPage from './pages/DiarioPage';
 
+=======
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
 
 function App() {
   const [obras, setObras] = useState([]);
   const [gestores, setGestores] = useState([]);
+<<<<<<< HEAD
   const [mestres, setMestres] = useState([]);
+=======
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+<<<<<<< HEAD
     const token = localStorage.getItem('token');
     const savedUser = localStorage.getItem('user');
     if (token && savedUser) {
@@ -42,12 +55,34 @@ function App() {
       }
     }
   }, [isAuthenticated, user]);
+=======
+    // Verificar se usuário já está logado
+    const token = localStorage.getItem('token');
+    const savedUser = localStorage.getItem('user');
+    
+    if (token && savedUser) {
+      setIsAuthenticated(true);
+      setUser(JSON.parse(savedUser));
+    }
+    
+    if (isAuthenticated) {
+      fetchObras();
+      fetchGestores();
+    }
+  }, [isAuthenticated]);
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
 
   const fetchGestores = async () => {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:5000/api/gestores', {
+<<<<<<< HEAD
         headers: { Authorization: `Bearer ${token}` }
+=======
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
       });
       const data = await response.json();
       setGestores(data);
@@ -60,7 +95,13 @@ function App() {
     try {
       const token = localStorage.getItem('token');
       const response = await fetch('http://localhost:5000/api/obras', {
+<<<<<<< HEAD
         headers: { Authorization: `Bearer ${token}` }
+=======
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
       });
       const data = await response.json();
       setObras(data);
@@ -76,6 +117,7 @@ function App() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+<<<<<<< HEAD
           Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(obra)
@@ -85,6 +127,16 @@ function App() {
     } catch (error) {
       console.error('Erro ao adicionar obra:', error);
       alert(error.message);
+=======
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(obra),
+      });
+      const newObra = await response.json();
+      setObras([...obras, newObra]);
+    } catch (error) {
+      console.error('Erro ao adicionar obra:', error);
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
     }
   };
 
@@ -95,6 +147,7 @@ function App() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+<<<<<<< HEAD
           Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(updatedObra)
@@ -104,12 +157,23 @@ function App() {
     } catch (error) {
       console.error('Erro ao atualizar obra:', error);
       alert(error.message);
+=======
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(updatedObra),
+      });
+      const data = await response.json();
+      setObras(obras.map(obra => (obra.id === id ? data : obra)));
+    } catch (error) {
+      console.error('Erro ao atualizar obra:', error);
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
     }
   };
 
   const deleteObra = async (id) => {
     try {
       const token = localStorage.getItem('token');
+<<<<<<< HEAD
       const response = await fetch(`http://localhost:5000/api/obras/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
@@ -176,6 +240,23 @@ function App() {
     setIsAuthenticated(true);
     setUser(userData);
     localStorage.setItem('user', JSON.stringify(userData));
+=======
+      await fetch(`http://localhost:5000/api/obras/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      setObras(obras.filter(obra => obra.id !== id));
+    } catch (error) {
+      console.error('Erro ao excluir obra:', error);
+    }
+  };
+
+  const handleLogin = (userData) => {
+    setIsAuthenticated(true);
+    setUser(userData);
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
   };
 
   const handleLogout = () => {
@@ -183,6 +264,7 @@ function App() {
     localStorage.removeItem('user');
     setIsAuthenticated(false);
     setUser(null);
+<<<<<<< HEAD
     setObras([]);
     setGestores([]);
     setMestres([]);
@@ -193,6 +275,13 @@ function App() {
   const isGestor = user?.role === 'gestor';
   const isMestre = user?.role === 'mestre';
   const isCliente = user?.role === 'cliente';
+=======
+  };
+
+  if (!isAuthenticated) {
+    return <Login onLogin={handleLogin} />;
+  }
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
 
   return (
     <Router>
@@ -200,6 +289,7 @@ function App() {
         <Navbar user={user} onLogout={handleLogout} />
         <div className="container-fluid">
           <div className="row">
+<<<<<<< HEAD
             <Sidebar user={user} />
             <div className="col-md-10 main-content">
               <Routes>
@@ -244,6 +334,29 @@ function App() {
 
                 {/* Qualquer outra rota redireciona para dashboard */}
                 <Route path="*" element={<Navigate to="/" replace />} />
+=======
+            <Sidebar />
+            <div className="col-md-10 main-content">
+              <Routes>
+                <Route path="/" element={
+                  <Dashboard obras={obras} gestores={gestores} />
+                } />
+                <Route path="/obras" element={
+                  <Obras 
+                    obras={obras} 
+                    gestores={gestores}
+                    addObra={addObra} 
+                    updateObra={updateObra}
+                    deleteObra={deleteObra} 
+                  />
+                } />
+                <Route path="/gestores" element={
+                  <Gestores 
+                    gestores={gestores} 
+                    setGestores={setGestores} 
+                  />
+                } />
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
               </Routes>
             </div>
           </div>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ObraList from '../components/obras/obralist.js';
@@ -14,6 +15,21 @@ const Obras = ({ obras, gestores, mestres, addObra, updateObra, deleteObra, fetc
 
   const handleEdit = (obra) => {
     navigate(`/obras/${obra.id}`);
+=======
+import React, { useState } from 'react';
+import ObraList from '../components/obras/obralist.js';
+import ObraForm from '../components/obras/obraform.js';
+
+const Obras = ({ obras, gestores, addObra, updateObra, deleteObra }) => {
+  console.log('Gestores no Obras (pages/obras.js):', gestores);
+  
+  const [editingObra, setEditingObra] = useState(null);
+  const [showForm, setShowForm] = useState(false);
+
+  const handleEdit = (obra) => {
+    setEditingObra(obra);
+    setShowForm(true);
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
   };
 
   const handleSubmit = (obra) => {
@@ -38,8 +54,12 @@ const Obras = ({ obras, gestores, mestres, addObra, updateObra, deleteObra, fetc
       {showForm ? (
         <ObraForm 
           obra={editingObra} 
+<<<<<<< HEAD
           gestores={gestores || []}
           mestres={mestres || []}
+=======
+          gestores={gestores}
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
           onSubmit={handleSubmit} 
           onCancel={handleCancel} 
         />
@@ -52,10 +72,16 @@ const Obras = ({ obras, gestores, mestres, addObra, updateObra, deleteObra, fetc
             <i className="bi bi-plus-circle"></i> Nova Obra
           </button>
           <ObraList 
+<<<<<<< HEAD
             obras={obras || []} 
             onEdit={handleEdit} 
             onDelete={deleteObra} 
             user={user}
+=======
+            obras={obras} 
+            onEdit={handleEdit} 
+            onDelete={deleteObra} 
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
           />
         </>
       )}

@@ -1,8 +1,12 @@
 import React from 'react';
 
+<<<<<<< HEAD
 const ObraList = ({ obras, onEdit, onDelete, user }) => {
   const isGestor = user?.role === 'gestor';
 
+=======
+const ObraList = ({ obras, onEdit, onDelete }) => {
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
   return (
     <div className="card">
       <div className="card-header">
@@ -15,15 +19,20 @@ const ObraList = ({ obras, onEdit, onDelete, user }) => {
               <tr>
                 <th>Nome</th>
                 <th>Localização</th>
+<<<<<<< HEAD
                 {!isGestor && <th>Gestor</th>}
                 <th>Mestre de Obras</th>
                 <th>Código</th>
+=======
+                <th>Gestor</th>
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
                 <th>Status</th>
                 <th>Progresso</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
+<<<<<<< HEAD
               {obras && obras.length > 0 ? (
                 obras.map(obra => (
                   <tr key={obra.id}>
@@ -71,6 +80,45 @@ const ObraList = ({ obras, onEdit, onDelete, user }) => {
                   </td>
                 </tr>
               )}
+=======
+              {obras.map(obra => (
+                <tr key={obra.id}>
+                  <td>{obra.nome}</td>
+                  <td>{obra.localizacao}</td>
+                  <td>{obra.gestor}</td>
+                  <td>
+                    <span className={`badge ${obra.status === 'Concluída' ? 'bg-success' : obra.status === 'Em andamento' ? 'bg-primary' : 'bg-warning'}`}>
+                      {obra.status}
+                    </span>
+                  </td>
+                  <td>
+                    <div className="progress">
+                      <div 
+                        className="progress-bar" 
+                        role="progressbar" 
+                        style={{ width: `${obra.progresso}%` }}
+                      >
+                        {obra.progresso}%
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <button 
+                      className="btn btn-sm btn-info me-2"
+                      onClick={() => onEdit(obra)}
+                    >
+                      <i className="bi bi-eye"></i>
+                    </button>
+                    <button 
+                      className="btn btn-sm btn-danger"
+                      onClick={() => onDelete(obra.id)}
+                    >
+                      <i className="bi bi-trash"></i>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
             </tbody>
           </table>
         </div>

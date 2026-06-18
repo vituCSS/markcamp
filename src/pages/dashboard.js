@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import React, { useEffect, useState } from 'react';
@@ -126,21 +127,48 @@ const Dashboard = ({ obras, gestores, user }) => {
   const obrasEmAndamento = listaObras.filter(o => o.status === 'Em andamento').length;
   const obrasConcluidas = listaObras.filter(o => o.status === 'Concluída').length;
   const obrasParalisadas = listaObras.filter(o => o.status === 'Atrasada' || o.status === 'Pausada').length;
+=======
+import React from 'react';
+import logo from '../assets/logomarkcamp.png';
+
+
+const Dashboard = ({ obras, gestores }) => {
+  const obrasEmAndamento = obras.filter(obra => obra.status === 'Em andamento').length;
+  const obrasConcluidas = obras.filter(obra => obra.status === 'Concluída').length;
+  const obrasAtrasadas = obras.filter(obra => obra.status === 'Atrasada').length;
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
 
   return (
     <>
       <div className="d-flex align-items-center mb-4">
+<<<<<<< HEAD
         <img src={logo} alt="Logo" className="me-3" style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
         <h2 className="page-title mb-0">Dashboard</h2>
       </div>
 
+=======
+        <img 
+          src={logo} 
+          alt="Logo do Sistema" 
+          className="me-3"
+          style={{ width: '50px', height: '50px', objectFit: 'cover' }}
+        />
+        <h2 className="page-title mb-0">Dashboard</h2>
+      </div>
+      
+      
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
       <div className="row">
         <div className="col-md-3">
           <div className="card dashboard-card">
             <div className="card-body">
               <i className="bi bi-building fs-1 text-primary"></i>
               <h5 className="card-title">Total de Obras</h5>
+<<<<<<< HEAD
               <p className="dashboard-number">{listaObras.length}</p>
+=======
+              <p className="dashboard-number">{obras.length}</p>
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
             </div>
           </div>
         </div>
@@ -158,7 +186,11 @@ const Dashboard = ({ obras, gestores, user }) => {
             <div className="card-body">
               <i className="bi bi-pause-circle fs-1 text-warning"></i>
               <h5 className="card-title">Paralisadas</h5>
+<<<<<<< HEAD
               <p className="dashboard-number">{obrasParalisadas}</p>
+=======
+              <p className="dashboard-number">{obrasAtrasadas}</p>
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
             </div>
           </div>
         </div>
@@ -173,6 +205,7 @@ const Dashboard = ({ obras, gestores, user }) => {
         </div>
       </div>
 
+<<<<<<< HEAD
       {loadingItens ? (
         <div className="card mt-4"><div className="card-body text-center">Carregando itens em falta...</div></div>
       ) : itensFalta.length > 0 ? (
@@ -210,12 +243,22 @@ const Dashboard = ({ obras, gestores, user }) => {
         <div className="card-body">
           <p>Total de obras cadastradas: <strong>{listaObras.length}</strong></p>
           <p>Total de gestores: <strong>{listaGestores.length}</strong></p>
+=======
+      <div className="card mt-4">
+        <div className="card-header">
+          <h5>Resumo das Obras</h5>
+        </div>
+        <div className="card-body">
+          <p>Total de obras cadastradas: <strong>{obras.length}</strong></p>
+          <p>Total de gestores: <strong>{gestores.length}</strong></p>
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
         </div>
       </div>
     </>
   );
 };
 
+<<<<<<< HEAD
 const ChecklistObra = ({ obraId }) => {
   const [etapas, setEtapas] = React.useState([]);
   const [loading, setLoading] = React.useState(true);
@@ -252,5 +295,7 @@ const ChecklistObra = ({ obraId }) => {
     </div>
   );
 };
+=======
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
 
 export default Dashboard;

@@ -17,6 +17,7 @@ const GestorForm = ({ gestor, onSubmit, onCancel }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     if (gestor) {
     onSubmit({
       nome,
@@ -31,6 +32,9 @@ const GestorForm = ({ gestor, onSubmit, onCancel }) => {
         telefone
       });
     }
+=======
+    onSubmit({ nome, cadastro_empresa, email, telefone });
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
   };
 
   return (
@@ -41,7 +45,11 @@ const GestorForm = ({ gestor, onSubmit, onCancel }) => {
       <div className="card-body">
         <form onSubmit={handleSubmit}>
           <div className="row">
+<<<<<<< HEAD
             <div className={gestor ? "col-md-6 mb-3" : "col-md-12 mb-3"}>
+=======
+            <div className="col-md-6 mb-3">
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
               <label className="form-label">Nome Completo</label>
               <input 
                 type="text" 
@@ -51,6 +59,7 @@ const GestorForm = ({ gestor, onSubmit, onCancel }) => {
                 required 
               />
             </div>
+<<<<<<< HEAD
             {gestor && (
             <div className="col-md-6 mb-3">
               <label className="form-label">Cadastro na Empresa</label>
@@ -63,6 +72,19 @@ const GestorForm = ({ gestor, onSubmit, onCancel }) => {
                 />
             </div>
             )}
+=======
+            <div className="col-md-6 mb-3">
+              <label className="form-label">Cadastro na Empresa</label>
+              <input 
+                type="text" 
+                className="form-control" 
+                value={cadastro_empresa} 
+                onChange={(e) => setCadastroEmpresa(e.target.value)} 
+                placeholder="Ex: MAT-1234"
+                required 
+              />
+            </div>
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
           </div>
           <div className="row">
             <div className="col-md-6 mb-3">

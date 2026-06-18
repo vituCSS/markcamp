@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const db = require('../server');
 const nodemailer = require('nodemailer');
 const PDFDocument = require('pdfkit');
@@ -154,3 +155,27 @@ function iniciarVerificacaoEstoque(intervaloMs = 30 * 60 * 1000) {
 }
 
 module.exports = { iniciarVerificacaoEstoque };
+=======
+require('dotenv').config();
+const mysql = require('mysql2');
+
+console.log('DB_USER:', process.env.DB_USER);
+console.log('DB_PASSWORD:', process.env.DB_PASSWORD);
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'markcamp_db'
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error('Erro ao conectar ao MySQL:', err);
+    return;
+  }
+  console.log('Conectado ao MySQL');
+});
+
+module.exports = connection;
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89

@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "markcamp-backend",
   "version": "1.0.0",
   "description": "Backend do sistema Markcamp - Gestão de Obras",
@@ -22,3 +23,23 @@
   "author": "",
   "license": "ISC"
 }
+=======
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^17.2.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.4"
+  }
+}
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89

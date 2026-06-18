@@ -1,6 +1,10 @@
 :root {
   --primary-color: #3f51f1;
+<<<<<<< HEAD
   --secondary-color: #13a0ff;
+=======
+  --secondary-color: #72c7ff;
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
   --accent-color: #e74c3c;
   --light-color: #ecf0f1;
   --dark-color: #2c3e50;
@@ -13,12 +17,16 @@ body {
 
 .navbar {
   background-color: var(--primary-color);
+<<<<<<< HEAD
   z-index: 2000;
+=======
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
 }
 
 .sidebar {
   background-color: #0013bb;
   color: #3f51f1;
+<<<<<<< HEAD
 
   position: fixed;
   top: 0;
@@ -30,6 +38,11 @@ body {
   padding-top: 70px; 
   overflow-y: auto;
   z-index: 1000;
+=======
+  height: calc(100vh - 56px);
+  position: fixed;
+  padding-top: 20px;
+>>>>>>> 594784b01a8965604b7340eeb0c0a5c27df0bf89
 }
 
 .sidebar a {
